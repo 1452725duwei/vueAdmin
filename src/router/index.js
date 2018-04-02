@@ -51,6 +51,12 @@ export const constantRouterMap = [
         meta: { title: 'Table', icon: 'table' }
       },
       {
+        path: 'table-edit',
+        name: 'Table-edit',
+        component: () => import('@/views/table-edit/index'),
+        meta: { title: 'Table-edit', icon: 'table' }
+      },
+      {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
@@ -99,14 +105,14 @@ export const constantRouterMap = [
   },
   
    {
-    path: '/component',
+    path: '/user',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Component',
-        component: () => import('@/views/component/index'),
-        meta: { title: 'Upload', icon: 'component' }
+        name: 'User',
+        component: () => import('@/views/user/index'),
+        meta: { title: 'User', icon: 'user' }
       }
     ]
   },
