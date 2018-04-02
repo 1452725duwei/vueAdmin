@@ -37,7 +37,9 @@
         <template slot-scope="scope">
           <template v-if="scope.row.edit">
             <el-input class="edit-input" size="small" v-model="scope.row.title"></el-input>
-            <el-button class='cancel-btn' size="small" icon="el-icon-refresh" type="warning" @click="cancelEdit(scope.row)">cancel</el-button>
+            <el-button class='cancel-btn' size="small" icon="el-icon-refresh" type="warning"
+                       @click="cancelEdit(scope.row)">cancel
+            </el-button>
           </template>
           <span v-else>{{ scope.row.title }}</span>
         </template>
@@ -45,8 +47,12 @@
 
       <el-table-column align="center" label="Actions" width="120">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.edit" type="success" @click="confirmEdit(scope.row)" size="small" icon="el-icon-circle-check-outline">Ok</el-button>
-          <el-button v-else type="primary" @click='scope.row.edit=!scope.row.edit' size="small" icon="el-icon-edit">Edit</el-button>
+          <el-button v-if="scope.row.edit" type="success" @click="confirmEdit(scope.row)" size="small"
+                     icon="el-icon-circle-check-outline">Ok
+          </el-button>
+          <el-button v-else type="primary" @click='scope.row.edit=!scope.row.edit' size="small" icon="el-icon-edit">
+            Edit
+          </el-button>
         </template>
       </el-table-column>
 
@@ -55,101 +61,101 @@
 </template>
 
 <script>
-
-export default {
-  name: 'table-edit',
-  data() {
-    return {
-      list: null,
-      listLoading: true,
-      listQuery: {
-        page: 1,
-        limit: 10
+  export default {
+    name: 'table-edit',
+    data() {
+      return {
+        list: null,
+        listLoading: true,
+        listQuery: {
+          page: 1,
+          limit: 10
+        }
       }
-    }
-  },
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
+    },
+    filters: {
+      statusFilter(status) {
+        const statusMap = {
+          published: 'success',
+          draft: 'info',
+          deleted: 'danger'
+        }
+        return statusMap[status]
       }
-      return statusMap[status]
-    }
-  },
-  created() {
-    this.getList()
-  },
-  methods: {
-    getList() {
-      this.listLoading = true
+    },
+    created() {
+      this.getList()
+    },
+    methods: {
+      getList() {
+        this.listLoading = true
         const items = [
-        {
-	        'id':'1',
-	        'timestamp':'2018',
-	        'author':'amy',
-	        'importance':'2',
-	        'status':'published',
-	        'title':'sadadsad'
-        },{
-	        'id':'2',
-	        'timestamp':'2018',
-	        'author':'amy',
-	        'importance':'2',
-	        'status':'draft',
-	        'title':'sadadsad'
-        },{
-	        'id':'3',
-	        'timestamp':'2018',
-	        'author':'amy',
-	        'importance':'2',
-	        'status':'draft',
-	        'title':'sadadsad'
-        },{
-	        'id':'4',
-	        'timestamp':'2018',
-	        'author':'amy',
-	        'importance':'2',
-	        'status':'published',
-	        'title':'sadadsad'
-        }];
+          {
+            'id': '1',
+            'timestamp': '2018',
+            'author': 'amy',
+            'importance': '2',
+            'status': 'published',
+            'title': 'sadadsad'
+          }, {
+            'id': '2',
+            'timestamp': '2018',
+            'author': 'amy',
+            'importance': '2',
+            'status': 'draft',
+            'title': 'sadadsad'
+          }, {
+            'id': '3',
+            'timestamp': '2018',
+            'author': 'amy',
+            'importance': '2',
+            'status': 'draft',
+            'title': 'sadadsad'
+          }, {
+            'id': '4',
+            'timestamp': '2018',
+            'author': 'amy',
+            'importance': '2',
+            'status': 'published',
+            'title': 'sadadsad'
+          }]
         this.list = items.map(v => {
           this.$set(v, 'edit', false) // https://vuejs.org/v2/guide/reactivity.html
-					console.log(v.status);
+          console.log(v.status)
           v.originalTitle = v.title //  will be used when user click the cancel botton
 
-        this.listLoading = false
-        return v
-      })
-    },
-    cancelEdit(row) {
-      row.title = row.originalTitle
-      row.edit = false
-      this.$message({
-        message: 'The title has been restored to the original value',
-        type: 'warning'
-      })
-    },
-    confirmEdit(row) {
-      row.edit = false
-      row.originalTitle = row.title
-      this.$message({
-        message: 'The title has been edited',
-        type: 'success'
-      })
+          this.listLoading = false
+          return v
+        })
+      },
+      cancelEdit(row) {
+        row.title = row.originalTitle
+        row.edit = false
+        this.$message({
+          message: 'The title has been restored to the original value',
+          type: 'warning'
+        })
+      },
+      confirmEdit(row) {
+        row.edit = false
+        row.originalTitle = row.title
+        this.$message({
+          message: 'The title has been edited',
+          type: 'success'
+        })
+      }
     }
   }
-}
 </script>
 
 <style scoped>
-.edit-input {
-  padding-right: 100px;
-}
-.cancel-btn {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-}
+  .edit-input {
+    padding-right: 100px;
+  }
+
+  .cancel-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  }
 </style>
