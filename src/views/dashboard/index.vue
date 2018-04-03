@@ -8,7 +8,6 @@
 <script>
   import { mapGetters } from 'vuex'
 
-  var Cookies = require('js-cookie')
   export default {
     name: 'dashboard',
     computed: {
@@ -16,19 +15,6 @@
         'name',
         'roles'
       ])
-    },
-    created() {
-      var token = Cookies.get('token')
-      var realName = Cookies.get('realName')
-      var userId = Cookies.get('userId')
-      console.log(token)
-      console.log(realName)
-      console.log(userId)
-      if (token === undefined || token === null) {
-        this.$router.push({
-          path: '/login'
-        })
-      }
     }
   }
 </script>

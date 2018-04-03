@@ -109,10 +109,10 @@
               'Authorization': Cookies.get('tokenId') + '__' + nonce + '__' + sign
             }
           }).then(response => {
-            console.log(response)
+            console.log(response.headers.map['Authorization-info'])
             if (response.body.errorCode === 0) {
               //	获取nonce并用nonce解密token
-              var nonce = getNonce(response.headers.map['Authorization-info'][0])
+              var nonce = getNonce(response.headers.map['Authorization-info'].join())
               Cookies.set('nonce', nonce)
               Cookies.set('token', getDAesString(response.body.token, nonce))
               console.log(getDAesString(response.body.token, nonce))
